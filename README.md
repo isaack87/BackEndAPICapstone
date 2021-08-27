@@ -1,2 +1,2 @@
 # RelatedAPIMongo
-Api using MongoDB
+Related Products API  w/MongoDB
