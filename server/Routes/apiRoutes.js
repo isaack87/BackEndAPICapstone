@@ -5,9 +5,15 @@ const RelatedAPI = require('../Models/apiModel.js');
 
 // Retrieve Product ID & Related Product ID
 router.get('/related', (req,res) => {
-    RelatedAPI.find({"current_product_id" : req.query.current_product_id}).limit(5)
+    RelatedAPI.find({"current_product_id" : req.query.current_product_id}).limit(25)
     .then((pid) => {
-      res.send(pid);
+      const relatedArrayIds = []
+      pid[0].related_product_id.map(data => {
+       if (!relatedArrayIds.includes(data)) {
+        relatedArrayIds.push(data)
+       }
+      })
+      res.send(relatedArrayIds.sort());
     });
 });
 
