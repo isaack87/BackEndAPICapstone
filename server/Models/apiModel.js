@@ -6,7 +6,6 @@ mongoose.connect('mongodb://localhost/relatedapi', { useNewUrlParser: true, useU
 .then(() => console.log('MongoDB Connection Successful'))
 .catch(err => console.log(err));
 
-
 // create RelatedSchema schema & model
 const RelatedSchema = new Schema({
   id: {type: Number},
