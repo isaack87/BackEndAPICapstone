@@ -4,8 +4,7 @@ const RelatedAPI = require('../Models/apiModel.js');
 
 // Retrieve Product ID & Related Product ID
 router.get('/related', (req,res) => {
-    RelatedAPI.find({"current_product_id" : req.query.current_product_id}).limit(25)
-    //console.log(req.query)
+    RelatedAPI.find({"_id" : req.query._id}).limit(1)
     .then((pid) => {
       const relatedArrayIds = []
       pid[0].related_product_id.map(data => {
@@ -13,17 +12,20 @@ router.get('/related', (req,res) => {
         relatedArrayIds.push(data)
        }
       })
-      res.send(relatedArrayIds.sort());
+      res.send(relatedArrayIds);
     });
+
 });
 
 // Post to database
-router.post('/related', (req,res) => {
-  RelatedAPI.create(req.body).then((pid) => {
-      res.send(pid);
-  })
-});
+// router.post('/related', (req,res) => {
+//   RelatedAPI.create(req.body).then((pid) => {
+//       res.send(pid);
+//   })
+// });
 
 
 module.exports = router;
+
+
 

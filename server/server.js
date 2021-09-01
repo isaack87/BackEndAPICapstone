@@ -18,6 +18,7 @@ app.use((req, res, next) => {
 // initialize routes
 app.use('/api',require('./Routes/apiRoutes.js'));
 
+
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server is listening on port: ${PORT}!`);
