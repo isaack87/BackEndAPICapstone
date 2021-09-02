@@ -4,7 +4,7 @@
   "description": "Api using MongoDB",
   "scripts": {
     "server": "npx nodemon server/server.js",
-    "test": "jest --runInBand ./test"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
