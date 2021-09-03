@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
+
+// ********************
+// REMEMBER TO DelETE _ID: "-1", was a test entry in mongo db
+//************************
+
 //connect to my mongoDB
 mongoose.connect('mongodb://localhost/relatedapi', { useNewUrlParser: true, useUnifiedTopology: true }, {})
 .then(() => console.log('MongoDB Connection Successful'))
