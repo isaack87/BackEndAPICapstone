@@ -1,3 +1,7 @@
 MongoNotes.txt
 cleaned.csv
 related.csv
+node_modules/
+tests
+.db.test.js
+.db.server.test.js
