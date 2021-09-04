@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Api using MongoDB",
   "scripts": {
-    "server": "npx nodemon server/server.js",
-    "test": "jest --coverage"
+    "clusterserver": "nodemon server/clusterserver.js",
+    "server": "nodemon server/server.js",
+    "test": "jest --coverage",
+    "load": "loadtest -c 10 --rps 1050 -t 30 http://localhost:5000/api/related?_id=4"
   },
+  "keywords": [],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rpp29-sdc-Deku/RelatedAPIMongo.git"
@@ -13,7 +16,6 @@
   "jest": {
     "preset": "@shelf/jest-mongodb"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -25,12 +27,16 @@
     "axios": "^0.21.0",
     "body-parser": "^1.19.0",
     "chai": "^4.3.4",
+    "cluster": "^0.7.7",
+    "co": "^4.6.0",
     "express": "^4.17.1",
     "jquery": "^3.1.1",
+    "loadtest": "^5.1.2",
     "mocha": "^9.1.1",
     "mongodb": "^4.1.1",
     "mongoose": "^5.2.8",
     "nodemon": "^2.0.12",
+    "os": "^0.1.2",
     "supertest": "^6.1.6"
   },
   "devDependencies": {

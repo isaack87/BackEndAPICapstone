@@ -1,7 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 
-let app = express();
+
+
+
+module.exports = () => {
+
+  let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true, useNewUrlParser: true}));
 app.use(express.json());
@@ -20,4 +25,9 @@ const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server is listening on port: ${PORT}!`);
 });
+
+}
+
+
+
 

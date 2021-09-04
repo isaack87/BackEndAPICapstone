@@ -11,7 +11,11 @@ let productID = req.query._id
     productID = 1
   }
 
-  RelatedAPI.find({"_id" : productID}).limit(1)
+    process.on('uncaughtException', function(ex) {
+      res.end('ID does not exist')
+    })
+
+  RelatedAPI.find({"_id" : productID})
     .then((pid) => {
       const relatedArrayIds = []
       pid[0].related_product_id.map(data => {
