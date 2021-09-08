@@ -1,4 +1,4 @@
 MongoNotes.txt
 cleaned.csv
-related.csv
-node_modules/
+/node_modules/
+/coverage/

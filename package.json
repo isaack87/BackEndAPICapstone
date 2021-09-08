@@ -6,7 +6,7 @@
     "clusterserver": "nodemon server/clusterserver.js",
     "server": "nodemon server/server.js",
     "test": "jest --coverage",
-    "load": "loadtest -c 10 --rps 1050 -t 30 http://localhost:5000/api/related?_id=4"
+    "load": "loadtest -c 10 --rps 1050 -t 30 http://localhost:5000/api/related?_id=5"
   },
   "keywords": [],
   "repository": {
