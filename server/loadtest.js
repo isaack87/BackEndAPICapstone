@@ -1,28 +1,36 @@
 const loadtest = require('loadtest');
 
-
-// function statusCallback(error, result, latency) {
-//     console.log('Current latency %j, result %j, error %j', latency, result, error);
-//     console.log('----');
-//     console.log('Request elapsed milliseconds: ', result.requestElapsed);
-//     console.log('Request index: ', result.requestIndex);
-//     console.log('Request loadtest() instance index: ', result.instanceIndex);
-// }
-
-const randomID =  Math.floor((Math.random() * 1000000) + 1)
-const options = {
-    url: `http://localhost:5000/api/related?_id=${randomID}`,
-    maxRequests: 500
-    //statusCallback: statusCallback
+function statusCallback(error, result, latency) {
+    console.log('Request index: %j, totalError %j, errorcode frequency %j error %j and RPS %j', result ? result.requestIndex : 'NOT FOUND', latency.totalErrors, latency.errorCodes, error, latency.rps)
 }
 
+  function options() {
+    let randomNum;
+      return {
+          url: 'http://localhost:5000/api/related?_id=value',
+          maxRequests: 10000,
+          concurrency: 100,
+          method: 'GET',
+          contentType: 'application/json',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          indexParam: "value",
+          body:   {
+              _id: "value"
+          },
+          statusCallback: statusCallback,
+        indexParamCallback: function () {
+        let randomNum = Math.floor(Math.random() * (1000000 - 1 + 1)) + 1
+        return randomNum
+      }}
+  }
 
-loadtest.loadTest(options, function(error, result) {
-
+  loadtest.loadTest(options(), function (error, result) {
+      // This blocks gets called when whole test is finished
     if (error) {
-        return console.error('Got an error: %s', error);
+      console.log('Got an error: %s', error)
     }
+    console.log('Got the following result from the test>>\n', result)
+  })
 
-    console.log(result)
-    console.log('Tests run successfully');
-});

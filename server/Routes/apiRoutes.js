@@ -24,7 +24,8 @@ let productID = req.query._id
        }
       })
       res.send(relatedArrayIds);
-    });
+      console.log(` ProductID: ${productID} returned these related ProductIDs: [${relatedArrayIds}]`)
+    })
 });
 
 module.exports = router
