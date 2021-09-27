@@ -8,7 +8,7 @@ function statusCallback(error, result, latency) {
     let randomNum;
       return {
           url: 'http://localhost:5000/api/related?_id=value',
-          maxRequests: 10000,
+          maxRequests: 5000,
           concurrency: 100,
           method: 'GET',
           contentType: 'application/json',
