@@ -1,74 +1,34 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 const router = express.Router();
 const RelatedAPI = require('../Models/apiModel.js');
+const {getProductID} = require('../Models/apiModel')
 
 
+const app = express();
 
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 // POST
+
 router.post('/related', (req,res) => {
- 
-    RelatedAPI.insertOne(req.body)
-    .then(result => {
-      console.log(result)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+  const id = req.query._id
+  const related = req.query.related_product_id
 
-    RelatedAPI.find({"_id" : productID})
-      .then((pid) => {
-        const relatedArrayIds = []
-        pid[0].related_product_id.map(data => {
-         if (!relatedArrayIds.includes(data)) {
-          relatedArrayIds.push(data)
-         }
-        })
-        res.send(relatedArrayIds);
-      })
-  });
+  getProductID(id, related, (err) => {
+    if (err) {
+      return ('post error');
+    } else {
+      res.send('success')
+    }
+  })
+
+})
 
 
-
-
-
-
-
-// GET
 router.get('/related', (req,res) => {
-let  = req.query._id
-  //if no _id is added defaults to first item in database
-  if (req.query._id === undefined) {
-    productID = 1
-  }
-    process.on('uncaughtException', function(ex) {
-      res.end('ID does not exist')
-    })
-
-  RelatedAPI.find({"_id" : productID})
-    .then((pid) => {
-      const relatedArrayIds = []
-      pid[0].related_product_id.map(data => {
-       if (!relatedArrayIds.includes(data)) {
-        relatedArrayIds.push(data)
-       }
-      })
-      res.send(relatedArrayIds);
-<<<<<<< HEAD
-=======
-      console.log(` ProductID: ${productID} returned these related ProductIDs: [${relatedArrayIds}]`)
->>>>>>> 0c1463cee6bf530d29c2af096bfb10793070bf45
-    })
-});
-
-
-
-
-
-// PUT
-router.put('/related', (req,res) => {
-  let  = req.query._id
+  let  productID = req.query._id
     //if no _id is added defaults to first item in database
     if (req.query._id === undefined) {
       productID = 1
@@ -76,8 +36,8 @@ router.put('/related', (req,res) => {
       process.on('uncaughtException', function(ex) {
         res.end('ID does not exist')
       })
-  
-    RelatedAPI.find({"_id" : productID})
+
+    RelatedAPI.find({"_id": productID})
       .then((pid) => {
         const relatedArrayIds = []
         pid[0].related_product_id.map(data => {
@@ -95,28 +55,63 @@ router.put('/related', (req,res) => {
 
 
 
-// DELETE
-router.delete('/related', (req,res) => {
-  let  = req.query._id
-    //if no _id is added defaults to first item in database
-    if (req.query._id === undefined) {
-      productID = 1
-    }
-      process.on('uncaughtException', function(ex) {
-        res.end('ID does not exist')
-      })
-  
-    RelatedAPI.find({"_id" : productID})
-      .then((pid) => {
-        const relatedArrayIds = []
-        pid[0].related_product_id.map(data => {
-         if (!relatedArrayIds.includes(data)) {
-          relatedArrayIds.push(data)
-         }
-        })
-        res.send(relatedArrayIds);
-      })
-  });
+
+
+
+
+
+
+// // PUT
+// router.put('/related', (req,res) => {
+//   let  = req.query._id
+//     //if no _id is added defaults to first item in database
+//     if (req.query._id === undefined) {
+//       productID = 1
+//     }
+//       process.on('uncaughtException', function(ex) {
+//         res.end('ID does not exist')
+//       })
+
+//     RelatedAPI.find({"_id" : productID})
+//       .then((pid) => {
+//         const relatedArrayIds = []
+//         pid[0].related_product_id.map(data => {
+//          if (!relatedArrayIds.includes(data)) {
+//           relatedArrayIds.push(data)
+//          }
+//         })
+//         res.send(relatedArrayIds);
+//       })
+//   });
+
+
+
+
+
+
+
+// // DELETE
+// router.delete('/related', (req,res) => {
+//   let  = req.query._id
+//     //if no _id is added defaults to first item in database
+//     if (req.query._id === undefined) {
+//       productID = 1
+//     }
+//       process.on('uncaughtException', function(ex) {
+//         res.end('ID does not exist')
+//       })
+
+//     RelatedAPI.find({"_id" : productID})
+//       .then((pid) => {
+//         const relatedArrayIds = []
+//         pid[0].related_product_id.map(data => {
+//          if (!relatedArrayIds.includes(data)) {
+//           relatedArrayIds.push(data)
+//          }
+//         })
+//         res.send(relatedArrayIds);
+//       })
+//   });
 
 
 
