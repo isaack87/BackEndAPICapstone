@@ -1,0 +1,99 @@
+
+A. 
+     -----------------------
+     |Biggest BreakThrough  |
+     -----------------------
+     
+     -Learning how to operate different OS like linux/ubuntu
+     -install all needed dependies node,npm,nvm 
+     - k6, loaderio, testing 
+     
+     ------------------
+     | what I learned |
+     ------------------
+     -Each differnt OS uses different command lines, different ways to install packages, enviromental dependies and compatility
+     -Coming up with stragies to test/target certain routes to simulate life network demand was more difficult than originally planned
+        - Useful tools to see which areas were causing bottleneck so we can fix the issue, rinse - repeat
+     
+ B. 
+     -----------------------
+     |Biggest BreakThrough  |
+     -----------------------
+     
+     -Relational vs. non-relation db choices
+     -database structure / optimization (lower query times)
+     -micro 1gb limitations 
+     -veritcal (larger machine) - horizontal(more servers)
+     
+     ------------------
+     | what I learned |
+     ------------------
+     - Learned advantages of relationalDB vs non-relational
+         relationalDB - offered better data structure, sorting with use of tables, only grab info needed
+         non-retionalDB - offers flexibility and adaptability less rules, limitations, unstructured info
+     - Explore query strings commands e.g - data structuring, Indexing query speed increase
+     - CPU Clustering
+         local CPU segmented/split advantage you can have CPU running at all times even if 1 cpu goes down
+         ec2 aws 1 cpu cannot use clustering not machine not powerful enough, deploy different strategy as load balancer to keep service running if 1 fails
+     - Vertical includes increasing memory, cpu, network speed / pros - unlimited potentional cons - cost alot of money
+       Horizontal increase nodes more servers pros - cheaper / cons - limited, complexity as project gets bigger
+         
+C.
+     -----------------------
+     |Biggest BreakThrough  |
+     ----------------------- 
+     Switching from Dev Mode(local) to Production Mode (deployed EC2)
+  
+     
+     ------------------
+     | what I learned |
+     ------------------
+      How to Connect to MongoDBs remote, local, cloud services
+      Reassigning routes from local to public IP / routes ... security settings opening ports to internet
+      
+ D.
+     -----------------------
+     |Biggest BreakThrough  |
+     ----------------------- 
+     Setting up nginx / understanding how a load balancer works, optons round robin, least conn, ip hash
+     Other benefits besides scaling, backup keep services running continueously
+     seperatin of concern frontend->loadbalancer->server1,2,3,4,5...
+     
+     ------------------
+     | what I learned |
+     ------------------
+      Learned about frontend access load balancer IP port that distributes to all other services
+      Offers security with less ports exposted to the web, lightweight load balancer faster data retrieval only install whats needed for each Ec2 not bogged down
+      by packages or code not used or needed.
+ 
+
+     
+CAR #1
+ 
+ 
+Challenge  - Large Scale Data ETL Process into EC2
+
+Action -  ETL process taken
+               -"E" =>  
+                            Devise a plan to extract data from local to AWS EC2
+                            Issues arised, I can simply push data csv to github and clone into ec2, but with sensitive data you wouldnt wanna do this so SCP exist.
+                            We can fix security issue with SCP(secure copy protocol), protection of secure data, usually will be sensitive data such as 
+                            database of users personal info if its a large company or bank accounts ect, industry standard
+                            
+               -"T" => Transform using mongo query mainly aggregation tables
+                  -> main challenge get array of items used $group and $sets to achieve data structure needed array of ids
+                  ->  notable other commands $out to save results of mongo data transformation
+                    ->  issue I had was my data was larger than 100mb so I had to enable to option to bypass this limitation
+                  ->  allowdiskuse() .... allowed mongo to use temp files on disk to store data above 100mb
+    
+    
+                -"L" => Connection to mongo shell, access to mongoSchema, loading in data via mongo shell commands. 
+                               Difficulty trying to get script to load on startup, decided to go with a manual command query in mongo 
+                               shell to complete ETL Process
+
+Result -  End result was a standalone API service fully deployed on EC2 which can now be accessed anywhere via public IP. 
+               Sucessful in making Get request to API service to return data in the desired struture. Tested using postman. Wrote
+               unit ingreation test to pull data from ETL database off EC2 and return correct data back to client.   
+
+
+-------------------------------------

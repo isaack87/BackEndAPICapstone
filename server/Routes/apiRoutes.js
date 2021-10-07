@@ -16,7 +16,7 @@ router.post('/related', (req,res) => {
     .catch(err => {
       console.log(err)
     })
-    
+
     RelatedAPI.find({"_id" : productID})
       .then((pid) => {
         const relatedArrayIds = []
@@ -55,6 +55,10 @@ let  = req.query._id
        }
       })
       res.send(relatedArrayIds);
+<<<<<<< HEAD
+=======
+      console.log(` ProductID: ${productID} returned these related ProductIDs: [${relatedArrayIds}]`)
+>>>>>>> 0c1463cee6bf530d29c2af096bfb10793070bf45
     })
 });
 
