@@ -8,8 +8,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-
-app.get('/loaderio-434428b40cdd21f1e114a316259d4ee4', (req,res) => {
+router.get('/', async (req,res) => {
+  res.json({status: 'get req to root'})
+})
+router.get('/loaderio-434428b40cdd21f1e114a316259d4ee4', (req,res) => {
   res.json('loaderio-434428b40cdd21f1e114a316259d4ee4')
 })
 
